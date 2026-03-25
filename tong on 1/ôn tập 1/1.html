@@ -14,7 +14,8 @@
     <div class="form">
         <input type="text" id="title" placeholder="Tên bài hát">
         <input type="text" id="artist" placeholder="Ca sĩ">
-        <button onclick="handleSubmit()" id="submitBtn">Thêm</button>
+        <button onclick="addSong()" id="addBtn">Thêm</button>
+        <button onclick="updateSong()" id="updateBtn" style="display: none;">Cập nhật</button>
     </div>
 
     <input type="text" id="search" placeholder="🔍 Tìm theo tên bài hát..." oninput="searchSong()">
