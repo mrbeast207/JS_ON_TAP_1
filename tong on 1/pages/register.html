@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang đăng ký</title>
+
+    <script src="../js/register.js" defer></script>
+    <link rel="stylesheet" href="../styles/register.css">
+</head>
+<body>
+
+<h1>Trang đăng ký</h1>
+
+<form>
+    <span>Tên người dùng:</span>
+    <input type="text" id="username" placeholder="nhập tên"><br>
+    <p class="error-name">tên không được để trống</p>
+
+    <span>Email:</span>
+    <input type="text" id="email" placeholder="nhập email"><br>
+    <p class="error-email">email không hợp lệ</p>
+
+    <span>Mật Khẩu:</span>
+    <input type="password" id="password" placeholder="nhập mật khẩu"><br>
+    <p class="error-password">mật khẩu phải ít nhất 8 ký tự</p>
+
+    <span>Xác Nhận Lại Mật Khẩu:</span>
+    <input type="password" id="confirmPassword" placeholder="xác nhận lại mật khẩu">
+
+   <form onsubmit="register(event)">
+    <button type="submit">Đăng ký</button> 
+</form>
+
+</body>
+</html>
