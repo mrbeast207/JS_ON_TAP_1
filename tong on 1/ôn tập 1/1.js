@@ -7,7 +7,28 @@ const submitBtn = document.getElementById("submitBtn");
 const formTitle = document.getElementById("formTitle");
 const songTable = document.getElementById("songTable");
 const searchInput = document.getElementById("search");
+//Chuc nang 1:them bai
+function addSong() {
+    const title = titleInput.value.trim();
+    const artist = artistInput.value.trim();
 
+    if (title === "" || artist === "") {
+        alert("Khong duoc de trong!");
+        return;
+    }
+
+    const newSong = {
+        id: songs.length > 0 ? songs[songs.length - 1].id + 1 : 1,
+        title: title,
+        artist: artist
+    };
+    songs.push(newSong);
+
+    localStorage.setItem("songs", JSON.stringify(songs));
+    renderSongs();
+    titleInput.value = "";
+    artistInput.value = "";
+}
 // Chuc nang 2: Hien thi danh sach bai hat
 function renderSongs(data = songs) {
     songTable.innerHTML = "";
@@ -27,8 +48,19 @@ function renderSongs(data = songs) {
     });
 }
 
-// Chuc nang 1 & 3: Them hoac Cap nhat bai hat
-function handleSubmit() {
+// Chuc nang 3
+function editSong(id) {
+    const song = songs.find(s => s.id === id);
+    if (song) {
+        titleInput.value = song.title;
+        artistInput.value = song.artist;
+        editId = id;
+        addBtn.style.display = "none";
+        updateBtn.style.display = "inline-block";
+        formTitle.innerText = "🎵 Sua bai hat";
+    }
+}
+function updateSong() {
     const title = titleInput.value.trim();
     const artist = artistInput.value.trim();
 
@@ -37,42 +69,23 @@ function handleSubmit() {
         return;
     }
 
-    if (editId === null) {
-        const newSong = {
-            id: songs.length > 0 ? songs[songs.length - 1].id + 1 : 1,
-            title: title,
-            artist: artist
-        };
-        songs.push(newSong);
-    } else {
-        for (let i = 0; i < songs.length; i++) {
-            if (songs[i].id === editId) {
-                songs[i].title = title;
-                songs[i].artist = artist;
-                break;
-            }
+    for (let i = 0; i < songs.length; i++) {
+        if (songs[i].id === editId) {
+            songs[i].title = title;
+            songs[i].artist = artist;
+            break;
         }
-        editId = null;
-        submitBtn.innerText = "Them";
-        formTitle.innerText = "Them bai hat";
     }
+    
+    editId = null;
+    addBtn.style.display = "inline-block";
+    updateBtn.style.display = "none";
+    formTitle.innerText = "🎵 Them bai hat";
 
     localStorage.setItem("songs", JSON.stringify(songs));
     renderSongs();
     titleInput.value = "";
     artistInput.value = "";
-}
-
-// Chuc nang 3: Do du lieu len form de sua
-function editSong(id) {
-    const song = songs.find(s => s.id === id);
-    if (song) {
-        titleInput.value = song.title;
-        artistInput.value = song.artist;
-        editId = id;
-        submitBtn.innerText = "Cap nhat";
-        formTitle.innerText = " Sua bai hat";
-    }
 }
 
 // Chuc nang 4: Xoa bai hat
